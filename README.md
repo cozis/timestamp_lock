@@ -4,7 +4,7 @@
 
 This is the implementation of a "timestamp lock", a type of lock I came up with. It may exist under another name, not sure.
 
-It solves the problem of deadlocks caused by processes (or threads) crashing in the critical section. Whith this solution, locks are automatically released when the process crashes, furthermore the next process to acquire the lock will be notified that the previous holder died.
+It solves the problem of deadlocks caused by processes (or threads) crashing in the critical section. With this solution, locks are automatically released when the process crashes, furthermore the next process to acquire the lock will be notified that the previous holder died.
 
 Regular locks use an atomic flag to encode if the lock was acquired. The "timestamp lock" uses a 64 bit word that is a date in the future when locked, and zero or a date in the past when unlocked.
 
