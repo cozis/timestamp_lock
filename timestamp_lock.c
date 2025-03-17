@@ -15,6 +15,7 @@
 
 #include "timestamp_lock.h"
 
+// Returns the current time in seconds since 1 Jan 1970
 static u64 timestamp_utc(void)
 {
 #if defined(__linux__)
@@ -116,7 +117,7 @@ int timestamp_lock(volatile u64 *word, u64 *ticket, int timeout_sec, int *crash)
 				(PVOID) &old_word,
 				sizeof(u64),
 				(old_word - now) * 1000))
-				return -1; // TODO: Choose an error number
+				return -EAGAIN;
 
 #elif defined(__linux__)
 
